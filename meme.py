@@ -6,7 +6,7 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import server  # Import ton fichier Flask
 
-TOKEN = "TON_TOKEN_ICI"  # remplace avec le vrai
+TOKEN = "7980302462:AAFS3EBrr1qaeWVwsY63W_fusboMlNKETE8"  # remplace avec le vrai
 
 FICHIER_QR = "base_qr.json"
 
@@ -91,3 +91,16 @@ if __name__ == "__main__":
     app.add_handler(CommandHandler("list", lister))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, repondre))
     app.run_polling()
+    from flask import Flask
+from threading import Thread
+
+web_app = Flask('')
+
+@web_app.route('/')
+def home():
+    return "Bot en ligne"
+
+def run_web():
+    web_app.run(host='0.0.0.0', port=8080)
+
+Thread(target=run_web).start()
